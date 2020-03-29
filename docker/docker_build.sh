@@ -23,7 +23,7 @@ function build_image()
     cp $project_path"/target/"$jar_name $project_path"/docker"
     cd $project_path"/docker"
     time=$(date "+%Y%m%d_%H%M%S")
-    tag=$time"_"$latest_commit_id"_release"
+    tag=$time"_"$latest_commit_id
     docker_name=$1":"$tag
     sudo docker build -t $docker_name .
 }
