@@ -17,18 +17,23 @@ function build_image()
     echo $project_path
     echo $jar_name
     cd $project_path
+    latest_commit_id=$(git rev-parse --short HEAD)
     rm -rf target
     mvn package
     cp $project_path"/target/"$jar_name $project_path"/docker"
     cd $project_path"/docker"
     time=$(date "+%Y%m%d_%H%M%S")
-    tag=$time"_release"
+    tag=$time"_"$latest_commit_id"_release"
     docker_name=$1":"$tag
     sudo docker build -t $docker_name .
 }
 
 function test(){
     echo $project_path_prefix
+    project_path=$project_path_prefix"/"$1
+    echo $project_path
+    latest_commitid=$(git rev-parse --short HEAD)
+    echo $latest_commitid
 }
 
 # 根据各个项目修改
