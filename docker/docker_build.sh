@@ -4,22 +4,23 @@
 
 #!/bin/bash
 
-# 整个项目父路径
-project_path_prefix="/home/tim/git/ishou"
-
 # 版本
-version="v1.0"
+version="v2.0"
 
 # 生成的jar包后缀
-jar_name_suffix="0.0.1-SNAPSHOT.jar"
+jar_name_suffix=".jar"
 
 function build_image()
 {
-    project_path=$project_path_prefix"/"$1
-    jar_name=$1"-"$jar_name_suffix
-    echo $project_path
-    echo $jar_name
-    cd $project_path
+    work_path=$(pwd)
+    echo "当前目录："$work_path
+
+    cd ../
+    project_path=$(pwd)
+    echo "当前项目路径："$project_path
+    jar_name=$1""$jar_name_suffix
+    echo "待生成镜像的jar包："$jar_name
+
     latest_commit_id=$(git rev-parse --short HEAD)
     branch=$(git symbolic-ref --short -q HEAD)
 
